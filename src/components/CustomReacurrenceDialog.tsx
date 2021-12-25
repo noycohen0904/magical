@@ -4,6 +4,11 @@ import IconHeader from "./IconHeader";
 import ReplayIcon from "@mui/icons-material/Replay";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
+import {
+  CustomSelect,
+  numberConstants,
+  repeatEveryConstants,
+} from "./CustomSelect";
 
 interface CustomReacurrenceDialogProps {
   title: string;
@@ -39,6 +44,8 @@ const CustomReacurrenceDialog = ({
         <IconHeader title="Repeat every">
           <ReplayIcon />
         </IconHeader>
+        <CustomSelect options={numberConstants} />
+        <CustomSelect options={repeatEveryConstants} />
       </Grid>
       <Grid
         container
