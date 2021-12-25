@@ -12,12 +12,12 @@ interface CustomReacurrenceDialogProps {
   doneDialog: (data: any) => void;
 }
 
-const CustomReacurrenceDialog: React.FC<CustomReacurrenceDialogProps> = ({
+const CustomReacurrenceDialog = ({
   title,
   open,
   closeDialog,
   doneDialog,
-}) => {
+}: CustomReacurrenceDialogProps) => {
   const handleCloseDialog = () => {
     closeDialog();
   };
