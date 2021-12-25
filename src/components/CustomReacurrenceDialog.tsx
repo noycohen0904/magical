@@ -1,13 +1,13 @@
 import { Dialog, DialogTitle } from "@mui/material";
 import React from "react";
 
-interface CustomDialogProps {
+interface CustomReacurrenceDialogProps {
   title: string;
   open: boolean;
   closeDialog: () => void;
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({
+const CustomReacurrenceDialog: React.FC<CustomReacurrenceDialogProps> = ({
   title,
   open,
   closeDialog,
@@ -23,4 +23,4 @@ const CustomDialog: React.FC<CustomDialogProps> = ({
   );
 };
 
-export default CustomDialog;
+export default CustomReacurrenceDialog;
