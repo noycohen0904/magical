@@ -13,6 +13,12 @@ function App() {
     setOpenDialog(false);
   };
 
+  const handleDoneDialog = (data: any) => {
+    console.log(data);
+    console.log("Done");
+    setOpenDialog(false);
+  };
+
   return (
     <div className="container">
       <Button onClick={handleOpenDialog}>Click to open Dialog</Button>
@@ -20,25 +26,10 @@ function App() {
         open={openDialog}
         title="Custom Reacurrence"
         closeDialog={handleCloseDialog}
+        doneDialog={handleDoneDialog}
       />
     </div>
   );
 }
 
 export default App;
-
-/**
- * <Action title="Repeat on">
-              <EventRepeatIcon />
-            </Action>
-
-    <Action title="Repeat every">
-              <ReplayIcon/>
-            </Action>
-
-
-            <Action title="Ends">
-              <KeyboardTabIcon/>
-            </Action>
- * 
- */
