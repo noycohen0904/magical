@@ -27,6 +27,7 @@ function App() {
         title="Custom Reacurrence"
         closeDialog={handleCloseDialog}
         doneDialog={handleDoneDialog}
+        date={new Date()}
       />
     </div>
   );

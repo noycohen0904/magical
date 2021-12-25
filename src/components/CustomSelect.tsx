@@ -1,42 +1,40 @@
 import React from "react";
 import { MenuItem, Select, Grid } from "@mui/material";
 
-interface selectOptionsInterface {
-  id: number;
-  text: string;
-}
+const repeatEveryConstants: string[] = ["day", "week", "month", "year"];
 
-const repeatEveryConstants: selectOptionsInterface[] = [
-  { id: 1, text: "day" },
-  { id: 2, text: "week" },
-  { id: 3, text: "month" },
-  { id: 4, text: "year" },
+const endConstants: string[] = [
+  "never",
+  "on specific day...",
+  "after number of occurences...",
 ];
 
-const numberConstants: selectOptionsInterface[] = [
-  { id: 1, text: "1" },
-  { id: 2, text: "2" },
-  { id: 3, text: "3" },
-  { id: 4, text: "4" },
-  { id: 5, text: "5" },
-  { id: 6, text: "6" },
-  { id: 7, text: "7" },
-  { id: 8, text: "8" },
-  { id: 9, text: "9" },
-  { id: 10, text: "10" },
-];
+const MAX_NUMBERS = 10;
+
+const numberConstants: string[] = Array.from(Array(MAX_NUMBERS).keys()).map(
+  (value) => (value + 1).toString()
+);
 
 interface CustomSelectProps {
-  options: selectOptionsInterface[];
+  options: string[];
+  selectChanged: (valueChanged: string) => void;
+  defaultValue: string;
 }
 
-const CustomSelect = ({ options }: CustomSelectProps) => {
+const CustomSelect = ({
+  options,
+  selectChanged,
+  defaultValue,
+}: CustomSelectProps) => {
   return (
     <Grid item>
-      <Select defaultValue={1}>
+      <Select
+        defaultValue={defaultValue}
+        onChange={(e) => selectChanged(e.target.value.toString())}
+      >
         {options.map((option) => (
-          <MenuItem key={option.id} value={option.id}>
-            {option.text}
+          <MenuItem key={option} value={option}>
+            {option}
           </MenuItem>
         ))}
       </Select>
@@ -44,4 +42,4 @@ const CustomSelect = ({ options }: CustomSelectProps) => {
   );
 };
 
-export { CustomSelect, repeatEveryConstants, numberConstants };
+export { CustomSelect, repeatEveryConstants, numberConstants, endConstants };
