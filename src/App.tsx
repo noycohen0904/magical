@@ -15,7 +15,6 @@ function App() {
 
   const handleDoneDialog = (data: any) => {
     console.log(data);
-    console.log("Done");
     setOpenDialog(false);
   };
 
