@@ -28,9 +28,10 @@ const DaysButtons = ({
 
   return (
     <>
+      {console.log("SELECTED DAYS INSIDE: " + selectedDays[0])}
       {Days.map((option) => (
         <Grid item key={option}>
-          {selectedDays.includes(option) ? (
+          {selectedDays.find((day) => day === option) ? (
             <button onClick={() => handleDayClicked(option)} key={option}>
               X
             </button>

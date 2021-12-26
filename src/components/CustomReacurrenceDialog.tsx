@@ -25,6 +25,7 @@ const CustomReacurrenceDialog = ({
   open,
   closeDialog,
   doneDialog,
+  date,
 }: CustomReacurrenceDialogProps) => {
   const [numberChanged, setNumberChanged] = useState(numberConstants[0]);
   const [repeatEvery, setRepeatEvery] = useState(repeatEveryConstants[1]);
@@ -55,8 +56,13 @@ const CustomReacurrenceDialog = ({
   };
 
   const handleSelectedDaysChanged = (dayClicked: string) => {
-    // setSelectedDays((selectedDays) => [...selectedDays, dayClicked]);
-    console.log("handleSelectedDaysChanged " + dayClicked);
+    // @ts-ignore
+    const index = selectedDays.indexOf(dayClicked);
+    if (index > -1) selectedDays.splice(index, 1);
+    // @ts-ignore
+    else selectedDays.push(dayClicked);
+
+    setSelectedDays([...selectedDays]);
   };
 
   return (
