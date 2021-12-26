@@ -110,91 +110,77 @@ const CustomReacurrenceDialog = ({
   return (
     <Dialog open={open} onClose={() => closeDialog()}>
       <DialogTitle>{title}</DialogTitle>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="center"
-        spacing={1}
-      >
-        <IconHeader title="Repeat every">
-          <ReplayIcon />
-        </IconHeader>
-        <CustomSelect
-          options={numberConstants}
-          selectChanged={handleEveryNumberChanged}
-          defaultValue={numberConstants[0]}
-        />
-        <CustomSelect
-          options={repeatEveryConstants}
-          selectChanged={handleRepeatEverySelectorChange}
-          defaultValue={repeatEveryConstants[1]}
-        />
-      </Grid>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="center"
-        spacing={1}
-      >
-        {(repeatEvery === MONTH || repeatEvery === WEEK) && (
-          <IconHeader title="Repeat on">
-            <EventRepeatIcon />
+      <Grid container spacing={1}>
+        <Grid container item spacing={1} alignItems="center">
+          <IconHeader title="Repeat every">
+            <ReplayIcon />
           </IconHeader>
-        )}
-        {repeatEvery === WEEK && (
-          <DaysButtons
-            selectedDays={selectedDays}
-            selectedDaysChanged={handleSelectedDaysChanged}
-          />
-        )}
-        {repeatEvery === MONTH && (
-          <CustomSelect
-            options={repeatOnMonthOptions}
-            selectChanged={handleMonthRepeatChanged}
-            defaultValue={repeatOnMonthOptions[0]}
-          />
-        )}
-      </Grid>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-start"
-        alignItems="center"
-        spacing={1}
-      >
-        <IconHeader title="Ends">
-          <KeyboardTabIcon />
-        </IconHeader>
-        <CustomSelect
-          options={endConstants}
-          selectChanged={handleEndSelectorChange}
-          defaultValue={NEVER}
-        />
-        {ends === AFTER && (
           <CustomSelect
             options={numberConstants}
-            selectChanged={handleOccurenceChange}
+            selectChanged={handleEveryNumberChanged}
             defaultValue={numberConstants[0]}
           />
-        )}
-        {ends === SPECIFIC && (
-          <Calender currentDate={date} clickedDate={handleEndDateChanged} />
-        )}
-      </Grid>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-          <Button onClick={() => closeDialog()}>Cancle</Button>
+          <CustomSelect
+            options={repeatEveryConstants}
+            selectChanged={handleRepeatEverySelectorChange}
+            defaultValue={WEEK}
+          />
         </Grid>
-        <Grid item>
-          <Button onClick={() => handleDoneDialog()}>Done</Button>
+        <Grid container item spacing={1} alignItems="center">
+          {(repeatEvery === MONTH || repeatEvery === WEEK) && (
+            <IconHeader title="Repeat on">
+              <EventRepeatIcon />
+            </IconHeader>
+          )}
+          {repeatEvery === WEEK && (
+            <DaysButtons
+              selectedDays={selectedDays}
+              selectedDaysChanged={handleSelectedDaysChanged}
+            />
+          )}
+          {repeatEvery === MONTH && (
+            <CustomSelect
+              options={repeatOnMonthOptions}
+              selectChanged={handleMonthRepeatChanged}
+              defaultValue={repeatOnMonthOptions[0]}
+            />
+          )}
+        </Grid>
+        <Grid container item spacing={1} alignItems="center">
+          <IconHeader title="Ends">
+            <KeyboardTabIcon />
+          </IconHeader>
+          <CustomSelect
+            options={endConstants}
+            selectChanged={handleEndSelectorChange}
+            defaultValue={NEVER}
+          />
+          {ends === AFTER && (
+            <CustomSelect
+              options={numberConstants}
+              selectChanged={handleOccurenceChange}
+              defaultValue={numberConstants[0]}
+            />
+          )}
+          {ends === SPECIFIC && (
+            <Calender currentDate={date} clickedDate={handleEndDateChanged} />
+          )}
+        </Grid>
+        <Grid container item justifyContent="flex-end" spacing={1}>
+          <Grid item>
+            <Button variant="outlined" onClick={() => closeDialog()}>
+              Cancle
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleDoneDialog()}
+            >
+              Done
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </Dialog>

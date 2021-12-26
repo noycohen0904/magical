@@ -23,23 +23,27 @@ const DaysButtons = ({
 }: DaysButtonsProps) => {
   const handleDayClicked = (day: string) => {
     console.log("handle day clicked inside DaysButtons - " + day);
-
     selectedDaysChanged(day);
+  };
+
+  const variantType = (option: string): "contained" | "outlined" => {
+    return selectedDays.find((day) => day === option)
+      ? "contained"
+      : "outlined";
   };
 
   return (
     <>
       {Days.map((option) => (
         <Grid item key={option}>
-          {selectedDays.find((day) => day === option) ? (
-            <Button onClick={() => handleDayClicked(option)} key={option}>
-              X
-            </Button>
-          ) : (
-            <Button onClick={() => handleDayClicked(option)} key={option}>
-              {option[0]}
-            </Button>
-          )}
+          <Button
+            size="small"
+            variant={variantType(option)}
+            onClick={() => handleDayClicked(option)}
+            key={option}
+          >
+            {option[0]}
+          </Button>
         </Grid>
       ))}
     </>
