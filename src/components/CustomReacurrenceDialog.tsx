@@ -12,6 +12,7 @@ import {
 } from "./CustomSelect";
 import { Days, DaysButtons } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../date/date";
+import Calender from "./Calender";
 
 interface CustomReacurrenceDialogProps {
   title: string;
@@ -44,6 +45,7 @@ const CustomReacurrenceDialog = ({
   const [monthRepeat, setMonthRepeat] = useState(repeatOnMonthOptions[0]);
   const [ends, setEnds] = useState(endConstants[0]);
   const [occurence, setOccurence] = useState(numberConstants[0]);
+  const [endDate, setEndDate] = useState(null);
 
   const handleEveryNumberChanged = (value: string) => {
     setRepeatEveryNumberChanged(value);
@@ -80,6 +82,14 @@ const CustomReacurrenceDialog = ({
   const handleOccurenceChange = (valueChange: string) => {
     setOccurence(valueChange);
     console.log("handleOccurenceChange " + valueChange);
+  };
+
+  const handleEndDateChanged = (dateChanged: Date | null) => {
+    if (dateChanged === null) {
+      console.log("handleEndDateChanged NULL");
+    } else {
+      console.log("handleEndDateChanged " + dateChanged!.toString());
+    }
   };
 
   const handleDoneDialog = () => {
@@ -151,6 +161,7 @@ const CustomReacurrenceDialog = ({
           selectChanged={handleOccurenceChange}
           defaultValue={numberConstants[0]}
         />
+        <Calender currentDate={date} clickedDate={handleEndDateChanged} />
       </Grid>
       <Grid
         container
