@@ -28,7 +28,6 @@ const DaysButtons = ({
 
   return (
     <>
-      {console.log("SELECTED DAYS INSIDE: " + selectedDays[0])}
       {Days.map((option) => (
         <Grid item key={option}>
           {selectedDays.find((day) => day === option) ? (
@@ -46,4 +45,4 @@ const DaysButtons = ({
   );
 };
 
-export { DaysButtons };
+export { DaysButtons, Days };

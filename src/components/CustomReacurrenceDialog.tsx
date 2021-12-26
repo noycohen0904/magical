@@ -10,7 +10,8 @@ import {
   numberConstants,
   repeatEveryConstants,
 } from "./CustomSelect";
-import { DaysButtons } from "./DaysButtons";
+import { Days, DaysButtons } from "./DaysButtons";
+import { occuredInMonth, ordinalSuffixOf } from "../date/date";
 
 interface CustomReacurrenceDialogProps {
   title: string;
@@ -27,32 +28,31 @@ const CustomReacurrenceDialog = ({
   doneDialog,
   date,
 }: CustomReacurrenceDialogProps) => {
-  const [numberChanged, setNumberChanged] = useState(numberConstants[0]);
+  const repeatOnMonthOptions = [
+    ordinalSuffixOf(date.getDate()) + " day of the month",
+    occuredInMonth(date.getDate()) +
+      " " +
+      Days[date.getDay()] +
+      " of the month",
+  ];
+
+  const [repeatEveryNumberChanged, setRepeatEveryNumberChanged] = useState(
+    numberConstants[0]
+  );
   const [repeatEvery, setRepeatEvery] = useState(repeatEveryConstants[1]);
-  const [endChanged, setEndChanged] = useState(endConstants[0]);
   const [selectedDays, setSelectedDays] = useState([]);
+  const [monthRepeat, setMonthRepeat] = useState(repeatOnMonthOptions[0]);
+  const [ends, setEnds] = useState(endConstants[0]);
+  const [occurence, setOccurence] = useState(numberConstants[0]);
 
-  const handleCloseDialog = () => {
-    closeDialog();
-  };
-
-  const handleDoneDialog = (data: any) => {
-    doneDialog(data);
+  const handleEveryNumberChanged = (value: string) => {
+    setRepeatEveryNumberChanged(value);
+    console.log("handleNumberChanged " + value);
   };
 
   const handleRepeatEverySelectorChange = (valueChanged: string) => {
     setRepeatEvery(valueChanged);
     console.log("handleRepeatEverySelectorChange " + valueChanged);
-  };
-
-  const handleNumberChanged = (value: string) => {
-    setNumberChanged(value);
-    console.log("handleNumberChanged " + value);
-  };
-
-  const handleEndSelectorChange = (valueChanged: string) => {
-    setEndChanged(valueChanged);
-    console.log("handleEndSelectorChange " + valueChanged);
   };
 
   const handleSelectedDaysChanged = (dayClicked: string) => {
@@ -63,10 +63,32 @@ const CustomReacurrenceDialog = ({
     else selectedDays.push(dayClicked);
 
     setSelectedDays([...selectedDays]);
+
+    console.log("handleSelectedDaysChanged " + dayClicked);
+  };
+
+  const handleMonthRepeatChanged = (valueChanged: string) => {
+    setMonthRepeat(valueChanged);
+    console.log("handleMonthRepeatChanged " + valueChanged);
+  };
+
+  const handleEndSelectorChange = (valueChanged: string) => {
+    setEnds(valueChanged);
+    console.log("handleEndSelectorChange " + valueChanged);
+  };
+
+  const handleOccurenceChange = (valueChange: string) => {
+    setOccurence(valueChange);
+    console.log("handleOccurenceChange " + valueChange);
+  };
+
+  const handleDoneDialog = () => {
+    // Build here the data
+    doneDialog({ stub: "stub" });
   };
 
   return (
-    <Dialog open={open} onClose={handleCloseDialog}>
+    <Dialog open={open} onClose={() => closeDialog()}>
       <DialogTitle>{title}</DialogTitle>
       <Grid
         container
@@ -80,7 +102,7 @@ const CustomReacurrenceDialog = ({
         </IconHeader>
         <CustomSelect
           options={numberConstants}
-          selectChanged={handleNumberChanged}
+          selectChanged={handleEveryNumberChanged}
           defaultValue={numberConstants[0]}
         />
         <CustomSelect
@@ -103,6 +125,11 @@ const CustomReacurrenceDialog = ({
           selectedDays={selectedDays}
           selectedDaysChanged={handleSelectedDaysChanged}
         />
+        <CustomSelect
+          options={repeatOnMonthOptions}
+          selectChanged={handleMonthRepeatChanged}
+          defaultValue={repeatOnMonthOptions[0]}
+        />
       </Grid>
       <Grid
         container
@@ -119,6 +146,11 @@ const CustomReacurrenceDialog = ({
           selectChanged={handleEndSelectorChange}
           defaultValue={endConstants[0]}
         />
+        <CustomSelect
+          options={numberConstants}
+          selectChanged={handleOccurenceChange}
+          defaultValue={numberConstants[0]}
+        />
       </Grid>
       <Grid
         container
@@ -128,12 +160,10 @@ const CustomReacurrenceDialog = ({
         spacing={1}
       >
         <Grid item>
-          <button onClick={() => handleCloseDialog()}>Cancle</button>
+          <button onClick={() => closeDialog()}>Cancle</button>
         </Grid>
         <Grid item>
-          <button onClick={() => handleDoneDialog({ stub: "stub" })}>
-            Done
-          </button>
+          <button onClick={() => handleDoneDialog()}>Done</button>
         </Grid>
       </Grid>
     </Dialog>
