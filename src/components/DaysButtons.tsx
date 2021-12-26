@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid } from "@mui/material";
+import Button from "@mui/material/Button";
 
 const Days: string[] = [
   "Sunday",
@@ -31,13 +32,13 @@ const DaysButtons = ({
       {Days.map((option) => (
         <Grid item key={option}>
           {selectedDays.find((day) => day === option) ? (
-            <button onClick={() => handleDayClicked(option)} key={option}>
+            <Button onClick={() => handleDayClicked(option)} key={option}>
               X
-            </button>
+            </Button>
           ) : (
-            <button onClick={() => handleDayClicked(option)} key={option}>
+            <Button onClick={() => handleDayClicked(option)} key={option}>
               {option[0]}
-            </button>
+            </Button>
           )}
         </Grid>
       ))}

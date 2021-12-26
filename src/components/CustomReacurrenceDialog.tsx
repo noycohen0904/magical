@@ -4,6 +4,7 @@ import IconHeader from "./IconHeader";
 import ReplayIcon from "@mui/icons-material/Replay";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
+import Button from "@mui/material/Button";
 import {
   AFTER,
   CustomSelect,
@@ -190,10 +191,10 @@ const CustomReacurrenceDialog = ({
         spacing={1}
       >
         <Grid item>
-          <button onClick={() => closeDialog()}>Cancle</button>
+          <Button onClick={() => closeDialog()}>Cancle</Button>
         </Grid>
         <Grid item>
-          <button onClick={() => handleDoneDialog()}>Done</button>
+          <Button onClick={() => handleDoneDialog()}>Done</Button>
         </Grid>
       </Grid>
     </Dialog>
