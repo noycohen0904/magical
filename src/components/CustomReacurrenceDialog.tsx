@@ -5,10 +5,15 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import {
+  AFTER,
   CustomSelect,
   endConstants,
+  MONTH,
+  NEVER,
   numberConstants,
   repeatEveryConstants,
+  SPECIFIC,
+  WEEK,
 } from "./CustomSelect";
 import { Days, DaysButtons } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../date/date";
@@ -38,16 +43,16 @@ const CustomReacurrenceDialog = ({
   ];
 
   const [repeatEveryNumberChanged, setRepeatEveryNumberChanged] =
-    useState<string>(numberConstants[0]);
-  const [repeatEvery, setRepeatEvery] = useState<string>(
-    repeatEveryConstants[1]
-  );
-  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+    useState<string>("1");
+  const [repeatEvery, setRepeatEvery] = useState<string>(WEEK);
+  const [selectedDays, setSelectedDays] = useState<string[]>([
+    Days[date.getDay()],
+  ]);
   const [monthRepeat, setMonthRepeat] = useState<string>(
     repeatOnMonthOptions[0]
   );
-  const [ends, setEnds] = useState<string>(endConstants[0]);
-  const [occurence, setOccurence] = useState<string>(numberConstants[0]);
+  const [ends, setEnds] = useState<string>(NEVER);
+  const [occurence, setOccurence] = useState<string>("1");
   const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleEveryNumberChanged = (value: string) => {
@@ -65,7 +70,8 @@ const CustomReacurrenceDialog = ({
     if (index > -1) selectedDays.splice(index, 1);
     else selectedDays.push(dayClicked);
 
-    setSelectedDays([...selectedDays]);
+    if (selectedDays.length === 0) setSelectedDays([Days[date.getDay()]]);
+    else setSelectedDays([...selectedDays]);
 
     console.log("handleSelectedDaysChanged " + dayClicked);
   };
@@ -88,8 +94,10 @@ const CustomReacurrenceDialog = ({
   const handleEndDateChanged = (dateChanged: Date | null) => {
     if (dateChanged === null) {
       console.log("handleEndDateChanged NULL");
+      setEndDate(null);
     } else {
       console.log("handleEndDateChanged " + dateChanged!.toString());
+      setEndDate(dateChanged);
     }
   };
 
@@ -129,18 +137,24 @@ const CustomReacurrenceDialog = ({
         alignItems="center"
         spacing={1}
       >
-        <IconHeader title="Repeat on">
-          <EventRepeatIcon />
-        </IconHeader>
-        <DaysButtons
-          selectedDays={selectedDays}
-          selectedDaysChanged={handleSelectedDaysChanged}
-        />
-        <CustomSelect
-          options={repeatOnMonthOptions}
-          selectChanged={handleMonthRepeatChanged}
-          defaultValue={repeatOnMonthOptions[0]}
-        />
+        {(repeatEvery === MONTH || repeatEvery === WEEK) && (
+          <IconHeader title="Repeat on">
+            <EventRepeatIcon />
+          </IconHeader>
+        )}
+        {repeatEvery === WEEK && (
+          <DaysButtons
+            selectedDays={selectedDays}
+            selectedDaysChanged={handleSelectedDaysChanged}
+          />
+        )}
+        {repeatEvery === MONTH && (
+          <CustomSelect
+            options={repeatOnMonthOptions}
+            selectChanged={handleMonthRepeatChanged}
+            defaultValue={repeatOnMonthOptions[0]}
+          />
+        )}
       </Grid>
       <Grid
         container
@@ -155,14 +169,18 @@ const CustomReacurrenceDialog = ({
         <CustomSelect
           options={endConstants}
           selectChanged={handleEndSelectorChange}
-          defaultValue={endConstants[0]}
+          defaultValue={NEVER}
         />
-        <CustomSelect
-          options={numberConstants}
-          selectChanged={handleOccurenceChange}
-          defaultValue={numberConstants[0]}
-        />
-        <Calender currentDate={date} clickedDate={handleEndDateChanged} />
+        {ends === AFTER && (
+          <CustomSelect
+            options={numberConstants}
+            selectChanged={handleOccurenceChange}
+            defaultValue={numberConstants[0]}
+          />
+        )}
+        {ends === SPECIFIC && (
+          <Calender currentDate={date} clickedDate={handleEndDateChanged} />
+        )}
       </Grid>
       <Grid
         container
