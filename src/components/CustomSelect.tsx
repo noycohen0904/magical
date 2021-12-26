@@ -1,13 +1,18 @@
 import React from "react";
 import { MenuItem, Select, Grid } from "@mui/material";
 
-const repeatEveryConstants: string[] = ["day", "week", "month", "year"];
+const NEVER = "never";
+const SPECIFIC = "on specific day...";
+const AFTER = "after number of occurences...";
 
-const endConstants: string[] = [
-  "never",
-  "on specific day...",
-  "after number of occurences...",
-];
+const DAY = "day";
+const WEEK = "week";
+const MONTH = "month";
+const YEAR = "year";
+
+const repeatEveryConstants: string[] = [DAY, WEEK, MONTH, YEAR];
+
+const endConstants: string[] = [NEVER, SPECIFIC, AFTER];
 
 const MAX_NUMBERS = 10;
 
@@ -42,4 +47,14 @@ const CustomSelect = ({
   );
 };
 
-export { CustomSelect, repeatEveryConstants, numberConstants, endConstants };
+export {
+  CustomSelect,
+  repeatEveryConstants,
+  numberConstants,
+  endConstants,
+  NEVER,
+  SPECIFIC,
+  AFTER,
+  WEEK,
+  MONTH,
+};
