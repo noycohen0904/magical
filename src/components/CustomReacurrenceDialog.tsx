@@ -37,15 +37,18 @@ const CustomReacurrenceDialog = ({
       " of the month",
   ];
 
-  const [repeatEveryNumberChanged, setRepeatEveryNumberChanged] = useState(
-    numberConstants[0]
+  const [repeatEveryNumberChanged, setRepeatEveryNumberChanged] =
+    useState<string>(numberConstants[0]);
+  const [repeatEvery, setRepeatEvery] = useState<string>(
+    repeatEveryConstants[1]
   );
-  const [repeatEvery, setRepeatEvery] = useState(repeatEveryConstants[1]);
-  const [selectedDays, setSelectedDays] = useState([]);
-  const [monthRepeat, setMonthRepeat] = useState(repeatOnMonthOptions[0]);
-  const [ends, setEnds] = useState(endConstants[0]);
-  const [occurence, setOccurence] = useState(numberConstants[0]);
-  const [endDate, setEndDate] = useState(null);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [monthRepeat, setMonthRepeat] = useState<string>(
+    repeatOnMonthOptions[0]
+  );
+  const [ends, setEnds] = useState<string>(endConstants[0]);
+  const [occurence, setOccurence] = useState<string>(numberConstants[0]);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleEveryNumberChanged = (value: string) => {
     setRepeatEveryNumberChanged(value);
@@ -58,10 +61,8 @@ const CustomReacurrenceDialog = ({
   };
 
   const handleSelectedDaysChanged = (dayClicked: string) => {
-    // @ts-ignore
     const index = selectedDays.indexOf(dayClicked);
     if (index > -1) selectedDays.splice(index, 1);
-    // @ts-ignore
     else selectedDays.push(dayClicked);
 
     setSelectedDays([...selectedDays]);
