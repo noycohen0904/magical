@@ -1,9 +1,10 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import IconHeader from "./IconHeader";
-import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import { DaysButtons } from "./DaysButtons";
 import { CustomSelect } from "./CustomSelect";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 
 interface RepeatOnProps {
   isWeek: boolean;
@@ -26,7 +27,7 @@ const RepeatOn = ({
     <Grid container item spacing={1} alignItems="center">
       {(isWeek || isMonth) && (
         <IconHeader title="Repeat on">
-          <EventRepeatIcon />
+          <CachedRoundedIcon fontSize="small" />
         </IconHeader>
       )}
       {isWeek && (

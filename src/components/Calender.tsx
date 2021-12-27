@@ -23,8 +23,7 @@ const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
         variant="outlined"
         endIcon={<ArrowDropUpIcon />}
         onClick={() => setOpen(true)}
-        size="small"
-        sx={{ textTransform: "none" }}
+        size="medium"
       >
         {Moment(chosenDate).format("MMMM DD, yyyy")}
         {console.log(chosenDate.toString())}

@@ -20,7 +20,9 @@ function App() {
 
   return (
     <div>
-      <Button onClick={handleOpenDialog}>Click to open Dialog</Button>
+      <Button onClick={handleOpenDialog} variant="contained">
+        Click to open Dialog
+      </Button>
       <CustomDialog
         open={openDialog}
         title="Custom Reacurrence"

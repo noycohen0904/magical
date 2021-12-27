@@ -25,7 +25,7 @@ const RepeatEvery = ({ numberChanged, episodeChanged }: RepeatEveryProps) => {
   return (
     <Grid container item spacing={1} alignItems="center">
       <IconHeader title="Repeat every">
-        <ReplayIcon />
+        <ReplayIcon fontSize="small" />
       </IconHeader>
       <CustomSelect
         options={repeatNumberOptions}

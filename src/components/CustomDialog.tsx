@@ -80,7 +80,7 @@ const CustomDialog = ({
   return (
     <Dialog open={open} onClose={() => closeDialog()}>
       <h3 style={{ paddingLeft: "2%" }}>{title}</h3>
-      <Grid container spacing={2} sx={{ paddingLeft: "2%" }}>
+      <Grid container spacing={3} sx={{ paddingLeft: "2%" }}>
         <RepeatEvery
           numberChanged={(value: string) => setRepeatCount(value)}
           episodeChanged={(value: string) => setRepeatEvery(value)}

@@ -38,9 +38,9 @@ const DaysButtons = ({
             key={option}
             sx={{
               maxWidth: "30px",
-              maxHeight: "30px",
+              maxHeight: "35px",
               minWidth: "30px",
-              minHeight: "30px",
+              minHeight: "35px",
             }}
           >
             {option[0]}

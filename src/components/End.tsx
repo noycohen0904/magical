@@ -38,7 +38,7 @@ const End = ({
   return (
     <Grid container item spacing={1} alignItems="center">
       <IconHeader title="Ends">
-        <KeyboardTabIcon />
+        <KeyboardTabIcon fontSize="small" />
       </IconHeader>
       <CustomSelect
         options={Object.values(EndOptions)}
