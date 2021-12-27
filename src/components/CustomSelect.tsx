@@ -5,16 +5,9 @@ const NEVER = "never";
 const SPECIFIC = "on specific day...";
 const AFTER = "after number of occurences...";
 
-const DAY = "day";
-const WEEK = "week";
-const MONTH = "month";
-const YEAR = "year";
+const endConstants: string[] = [NEVER, SPECIFIC, AFTER];
 
 const MAX_NUMBERS = 10;
-
-const repeatEveryConstants: string[] = [DAY, WEEK, MONTH, YEAR];
-
-const endConstants: string[] = [NEVER, SPECIFIC, AFTER];
 
 const numberConstants: string[] = Array.from(Array(MAX_NUMBERS).keys()).map(
   (value) => (value + 1).toString()
@@ -47,14 +40,4 @@ const CustomSelect = ({
   );
 };
 
-export {
-  CustomSelect,
-  repeatEveryConstants,
-  numberConstants,
-  endConstants,
-  NEVER,
-  SPECIFIC,
-  AFTER,
-  WEEK,
-  MONTH,
-};
+export { CustomSelect, numberConstants, endConstants, NEVER, SPECIFIC, AFTER };

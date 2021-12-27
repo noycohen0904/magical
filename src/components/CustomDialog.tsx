@@ -1,24 +1,21 @@
 import { Dialog, DialogTitle, Grid } from "@mui/material";
 import React, { useState } from "react";
 import IconHeader from "./IconHeader";
-import ReplayIcon from "@mui/icons-material/Replay";
 import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
-import Button from "@mui/material/Button";
 import {
   AFTER,
   CustomSelect,
   endConstants,
-  MONTH,
   NEVER,
   numberConstants,
-  repeatEveryConstants,
   SPECIFIC,
-  WEEK,
 } from "./CustomSelect";
 import { Days, DaysButtons } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
 import Calender from "./Calender";
+import ActionButtons from "./ActionButtons";
+import { RepeatEvery, Episode } from "./RepeatEvery";
 
 interface CustomDialogProps {
   title: string;
@@ -45,7 +42,7 @@ const CustomDialog = ({
 
   const [repeatEveryNumberChanged, setRepeatEveryNumberChanged] =
     useState<string>("1");
-  const [repeatEvery, setRepeatEvery] = useState<string>(WEEK);
+  const [repeatEvery, setRepeatEvery] = useState<string>(Episode.WEEK);
   const [selectedDays, setSelectedDays] = useState<string[]>([
     Days[date.getDay()],
   ]);
@@ -55,16 +52,6 @@ const CustomDialog = ({
   const [ends, setEnds] = useState<string>(NEVER);
   const [occurence, setOccurence] = useState<string>("1");
   const [endDate, setEndDate] = useState<Date>(date);
-
-  const handleEveryNumberChanged = (value: string) => {
-    setRepeatEveryNumberChanged(value);
-    console.log("handleNumberChanged " + value);
-  };
-
-  const handleRepeatEverySelectorChange = (valueChanged: string) => {
-    setRepeatEvery(valueChanged);
-    console.log("handleRepeatEverySelectorChange " + valueChanged);
-  };
 
   const handleSelectedDaysChanged = (dayClicked: string) => {
     const index = selectedDays.indexOf(dayClicked);
@@ -112,34 +99,23 @@ const CustomDialog = ({
     <Dialog open={open} onClose={() => closeDialog()}>
       <DialogTitle sx={{ paddingLeft: "2%" }}>{title}</DialogTitle>
       <Grid container spacing={1} sx={{ paddingLeft: "2%" }}>
+        <RepeatEvery
+          numberChanged={(value: string) => setRepeatEveryNumberChanged(value)}
+          episodeChanged={(value: string) => setRepeatEvery(value)}
+        />
         <Grid container item spacing={1} alignItems="center">
-          <IconHeader title="Repeat every">
-            <ReplayIcon />
-          </IconHeader>
-          <CustomSelect
-            options={numberConstants}
-            selectChanged={handleEveryNumberChanged}
-            defaultValue={numberConstants[0]}
-          />
-          <CustomSelect
-            options={repeatEveryConstants}
-            selectChanged={handleRepeatEverySelectorChange}
-            defaultValue={WEEK}
-          />
-        </Grid>
-        <Grid container item spacing={1} alignItems="center">
-          {(repeatEvery === MONTH || repeatEvery === WEEK) && (
+          {(repeatEvery === Episode.MONTH || repeatEvery === Episode.WEEK) && (
             <IconHeader title="Repeat on">
               <EventRepeatIcon />
             </IconHeader>
           )}
-          {repeatEvery === WEEK && (
+          {repeatEvery === Episode.WEEK && (
             <DaysButtons
               selectedDays={selectedDays}
               selectedDaysChanged={handleSelectedDaysChanged}
             />
           )}
-          {repeatEvery === MONTH && (
+          {repeatEvery === Episode.MONTH && (
             <CustomSelect
               options={repeatOnMonthOptions}
               selectChanged={handleMonthRepeatChanged}
@@ -171,33 +147,10 @@ const CustomDialog = ({
             />
           )}
         </Grid>
-        <Grid
-          container
-          item
-          justifyContent="flex-end"
-          spacing={1}
-          sx={{ paddingBottom: "10px", paddingRight: "2%" }}
-        >
-          <Grid item>
-            <Button
-              size="small"
-              variant="outlined"
-              onClick={() => closeDialog()}
-            >
-              Cancel
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              size="small"
-              variant="contained"
-              color="primary"
-              onClick={() => handleDoneDialog()}
-            >
-              Done
-            </Button>
-          </Grid>
-        </Grid>
+        <ActionButtons
+          closeDialog={closeDialog}
+          handleDoneDialog={handleDoneDialog}
+        />
       </Grid>
     </Dialog>
   );
