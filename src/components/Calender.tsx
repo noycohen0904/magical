@@ -1,30 +1,30 @@
 import React from "react";
-import { Grid, TextField } from "@mui/material";
-import DatePicker from "@mui/lab/DatePicker";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { Grid } from "@mui/material";
+import DateFnsUtils from "@date-io/date-fns";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 interface CalenderProps {
   currentDate: Date;
+  chosenDate: Date;
   clickedDate: (dateChanged: Date | null) => void;
 }
 
-const Calender = ({ currentDate, clickedDate }: CalenderProps) => {
-  const [date, setDate] = React.useState<Date | null>(null);
-
+const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
   return (
     <Grid item>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <DatePicker
-          value={date}
+          value={chosenDate}
           minDate={currentDate}
-          onChange={(newDate) => {
+          inputVariant="outlined"
+          variant="inline"
+          autoOk={true}
+          format="MMMM dd, yyyy"
+          onChange={(newDate: any) => {
             clickedDate(newDate);
-            setDate(newDate);
           }}
-          renderInput={(params) => <TextField {...params} />}
         />
-      </LocalizationProvider>
+      </MuiPickersUtilsProvider>
     </Grid>
   );
 };

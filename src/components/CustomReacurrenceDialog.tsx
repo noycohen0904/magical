@@ -54,7 +54,7 @@ const CustomReacurrenceDialog = ({
   );
   const [ends, setEnds] = useState<string>(NEVER);
   const [occurence, setOccurence] = useState<string>("1");
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date>(date);
 
   const handleEveryNumberChanged = (value: string) => {
     setRepeatEveryNumberChanged(value);
@@ -95,7 +95,7 @@ const CustomReacurrenceDialog = ({
   const handleEndDateChanged = (dateChanged: Date | null) => {
     if (dateChanged === null) {
       console.log("handleEndDateChanged NULL");
-      setEndDate(null);
+      setEndDate(date);
     } else {
       console.log("handleEndDateChanged " + dateChanged!.toString());
       setEndDate(dateChanged);
@@ -104,6 +104,7 @@ const CustomReacurrenceDialog = ({
 
   const handleDoneDialog = () => {
     // Build here the data
+    // Check validation
     doneDialog({ stub: "stub" });
   };
 
@@ -163,7 +164,11 @@ const CustomReacurrenceDialog = ({
             />
           )}
           {ends === SPECIFIC && (
-            <Calender currentDate={date} clickedDate={handleEndDateChanged} />
+            <Calender
+              currentDate={date}
+              chosenDate={endDate}
+              clickedDate={handleEndDateChanged}
+            />
           )}
         </Grid>
         <Grid container item justifyContent="flex-end" spacing={1}>
