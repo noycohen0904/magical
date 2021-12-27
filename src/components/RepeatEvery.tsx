@@ -3,6 +3,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import IconHeader from "./IconHeader";
 import { Grid } from "@mui/material";
 import { CustomSelect } from "./CustomSelect";
+import { numberConstants } from "../utils/numberHelper";
 
 enum Episode {
   DAY = "day",
@@ -13,9 +14,7 @@ enum Episode {
 
 const MAX_NUMBERS = 10;
 
-const numberConstants: string[] = Array.from(Array(MAX_NUMBERS).keys()).map(
-  (value) => (value + 1).toString()
-);
+const repeatNumberOptions = numberConstants(MAX_NUMBERS);
 
 interface RepeatEveryProps {
   numberChanged: (value: string) => void;
@@ -29,9 +28,9 @@ const RepeatEvery = ({ numberChanged, episodeChanged }: RepeatEveryProps) => {
         <ReplayIcon />
       </IconHeader>
       <CustomSelect
-        options={numberConstants}
+        options={repeatNumberOptions}
         selectChanged={numberChanged}
-        defaultValue={numberConstants[0]}
+        defaultValue={repeatNumberOptions[0]}
       />
       <CustomSelect
         options={Object.values(Episode)}

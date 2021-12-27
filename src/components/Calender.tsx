@@ -18,6 +18,7 @@ const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
   return (
     <Grid item>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <div>calender</div>
         {/* <StaticDatePicker
           displayStaticWrapperAs="desktop"
           value={value}

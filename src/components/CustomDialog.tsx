@@ -1,21 +1,11 @@
 import { Dialog, DialogTitle, Grid } from "@mui/material";
 import React, { useState } from "react";
-import IconHeader from "./IconHeader";
-import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
-import {
-  AFTER,
-  CustomSelect,
-  endConstants,
-  NEVER,
-  numberConstants,
-  SPECIFIC,
-} from "./CustomSelect";
-import { Days, DaysButtons } from "./DaysButtons";
+import { Days } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
-import Calender from "./Calender";
 import ActionButtons from "./ActionButtons";
 import { RepeatEvery, Episode } from "./RepeatEvery";
 import RepeatOn from "./RepeatOn";
+import { End, EndOptions } from "./End";
 
 interface CustomDialogProps {
   title: string;
@@ -49,7 +39,7 @@ const CustomDialog = ({
   const [monthRepeat, setMonthRepeat] = useState<string>(
     repeatOnMonthOptions[0]
   );
-  const [ends, setEnds] = useState<string>(NEVER);
+  const [ends, setEnds] = useState<string>(EndOptions.NEVER);
   const [occurence, setOccurence] = useState<string>("1");
   const [endDate, setEndDate] = useState<Date>(date);
 
@@ -62,16 +52,6 @@ const CustomDialog = ({
     else setSelectedDays([...selectedDays]);
 
     console.log("handleSelectedDaysChanged " + dayClicked);
-  };
-
-  const handleEndSelectorChange = (valueChanged: string) => {
-    setEnds(valueChanged);
-    console.log("handleEndSelectorChange " + valueChanged);
-  };
-
-  const handleOccurenceChange = (valueChange: string) => {
-    setOccurence(valueChange);
-    console.log("handleOccurenceChange " + valueChange);
   };
 
   const handleEndDateChanged = (dateChanged: Date | null) => {
@@ -106,30 +86,15 @@ const CustomDialog = ({
           monthRepeatChanged={(valueChanged) => setMonthRepeat(valueChanged)}
           options={repeatOnMonthOptions}
         />
-        <Grid container item spacing={1} alignItems="center">
-          <IconHeader title="Ends">
-            <KeyboardTabIcon />
-          </IconHeader>
-          <CustomSelect
-            options={endConstants}
-            selectChanged={handleEndSelectorChange}
-            defaultValue={NEVER}
-          />
-          {ends === AFTER && (
-            <CustomSelect
-              options={numberConstants}
-              selectChanged={handleOccurenceChange}
-              defaultValue={numberConstants[0]}
-            />
-          )}
-          {ends === SPECIFIC && (
-            <Calender
-              currentDate={date}
-              chosenDate={endDate}
-              clickedDate={handleEndDateChanged}
-            />
-          )}
-        </Grid>
+        <End
+          endChanged={(value) => setEnds(value)}
+          isEnd={ends === EndOptions.AFTER}
+          occurenceChanged={(value) => setOccurence(value)}
+          isSpecific={ends === EndOptions.SPECIFIC}
+          currentDate={date}
+          chosenDate={endDate}
+          dateChanged={(newDate) => handleEndDateChanged(newDate)}
+        />
         <ActionButtons
           closeDialog={closeDialog}
           handleDoneDialog={handleDoneDialog}
