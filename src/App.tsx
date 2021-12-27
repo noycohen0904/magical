@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import CustomReacurrenceDialog from "./components/CustomReacurrenceDialog";
+import CustomDialog from "./components/CustomDialog";
 
 function App() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -19,9 +19,9 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <div>
       <Button onClick={handleOpenDialog}>Click to open Dialog</Button>
-      <CustomReacurrenceDialog
+      <CustomDialog
         open={openDialog}
         title="Custom Reacurrence"
         closeDialog={handleCloseDialog}

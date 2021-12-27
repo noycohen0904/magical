@@ -17,10 +17,10 @@ import {
   WEEK,
 } from "./CustomSelect";
 import { Days, DaysButtons } from "./DaysButtons";
-import { occuredInMonth, ordinalSuffixOf } from "../date/date";
+import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
 import Calender from "./Calender";
 
-interface CustomReacurrenceDialogProps {
+interface CustomDialogProps {
   title: string;
   open: boolean;
   closeDialog: () => void;
@@ -28,13 +28,13 @@ interface CustomReacurrenceDialogProps {
   date: Date;
 }
 
-const CustomReacurrenceDialog = ({
+const CustomDialog = ({
   title,
   open,
   closeDialog,
   doneDialog,
   date,
-}: CustomReacurrenceDialogProps) => {
+}: CustomDialogProps) => {
   const repeatOnMonthOptions = [
     ordinalSuffixOf(date.getDate()) + " day of the month",
     occuredInMonth(date.getDate()) +
@@ -110,8 +110,8 @@ const CustomReacurrenceDialog = ({
 
   return (
     <Dialog open={open} onClose={() => closeDialog()}>
-      <DialogTitle>{title}</DialogTitle>
-      <Grid container spacing={1}>
+      <DialogTitle sx={{ paddingLeft: "2%" }}>{title}</DialogTitle>
+      <Grid container spacing={1} sx={{ paddingLeft: "2%" }}>
         <Grid container item spacing={1} alignItems="center">
           <IconHeader title="Repeat every">
             <ReplayIcon />
@@ -171,14 +171,25 @@ const CustomReacurrenceDialog = ({
             />
           )}
         </Grid>
-        <Grid container item justifyContent="flex-end" spacing={1}>
+        <Grid
+          container
+          item
+          justifyContent="flex-end"
+          spacing={1}
+          sx={{ paddingBottom: "10px", paddingRight: "2%" }}
+        >
           <Grid item>
-            <Button variant="outlined" onClick={() => closeDialog()}>
-              Cancle
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={() => closeDialog()}
+            >
+              Cancel
             </Button>
           </Grid>
           <Grid item>
             <Button
+              size="small"
               variant="contained"
               color="primary"
               onClick={() => handleDoneDialog()}
@@ -192,4 +203,4 @@ const CustomReacurrenceDialog = ({
   );
 };
 
-export default CustomReacurrenceDialog;
+export default CustomDialog;

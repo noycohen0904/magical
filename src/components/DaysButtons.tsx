@@ -41,6 +41,12 @@ const DaysButtons = ({
             variant={variantType(option)}
             onClick={() => handleDayClicked(option)}
             key={option}
+            sx={{
+              maxWidth: "30px",
+              maxHeight: "30px",
+              minWidth: "30px",
+              minHeight: "30px",
+            }}
           >
             {option[0]}
           </Button>

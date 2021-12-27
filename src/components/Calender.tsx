@@ -1,7 +1,10 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import DateFnsUtils from "@date-io/date-fns";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import TextField from "@mui/material/TextField";
+import StaticDatePicker from "@mui/lab/StaticDatePicker";
 
 interface CalenderProps {
   currentDate: Date;
@@ -10,21 +13,38 @@ interface CalenderProps {
 }
 
 const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
+  const [value, setValue] = React.useState<Date | null>(new Date());
+
   return (
     <Grid item>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DatePicker
-          value={chosenDate}
-          minDate={currentDate}
-          inputVariant="outlined"
-          variant="inline"
-          autoOk={true}
-          format="MMMM dd, yyyy"
-          onChange={(newDate: any) => {
-            clickedDate(newDate);
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        {/* <StaticDatePicker
+          displayStaticWrapperAs="desktop"
+          value={value}
+          onChange={(newValue) => {
+            setValue(newValue);
           }}
-        />
-      </MuiPickersUtilsProvider>
+          renderInput={(params) => <TextField {...params} />}
+        /> */}
+        {/* <DatePicker
+          minDate={currentDate}
+          value={chosenDate}
+          inputFormat="MMMM dd, yyyy"
+          onChange={(newValue) => {
+            clickedDate(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("EVENT");
+              }}
+            />
+          )}
+        /> */}
+      </LocalizationProvider>
     </Grid>
   );
 };
