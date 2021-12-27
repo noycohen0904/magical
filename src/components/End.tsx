@@ -23,7 +23,7 @@ interface EndProps {
   isSpecific: boolean;
   currentDate: Date;
   chosenDate: Date;
-  dateChanged: (newDate: Date | null) => void;
+  dateChanged: (newDate: Date) => void;
 }
 
 const End = ({

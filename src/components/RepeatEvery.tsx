@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 import { CustomSelect } from "./CustomSelect";
 import { numberConstants } from "../utils/numberHelper";
 
-enum Episode {
+enum Period {
   DAY = "day",
   WEEK = "week",
   MONTH = "month",
@@ -33,12 +33,12 @@ const RepeatEvery = ({ numberChanged, episodeChanged }: RepeatEveryProps) => {
         defaultValue={repeatNumberOptions[0]}
       />
       <CustomSelect
-        options={Object.values(Episode)}
+        options={Object.values(Period)}
         selectChanged={episodeChanged}
-        defaultValue={Episode.WEEK}
+        defaultValue={Period.WEEK}
       />
     </Grid>
   );
 };
 
-export { RepeatEvery, Episode };
+export { RepeatEvery, Period };

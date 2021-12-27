@@ -1,8 +1,6 @@
 import React from "react";
 import { MenuItem, Select, Grid } from "@mui/material";
 
-const MAX_NUMBERS = 10;
-
 interface CustomSelectProps {
   options: string[];
   selectChanged: (valueChanged: string) => void;
@@ -19,6 +17,7 @@ const CustomSelect = ({
       <Select
         defaultValue={defaultValue}
         onChange={(e) => selectChanged(e.target.value.toString())}
+        size="small"
       >
         {options.map((option) => (
           <MenuItem key={option} value={option}>

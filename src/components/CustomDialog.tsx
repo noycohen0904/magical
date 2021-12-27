@@ -1,9 +1,9 @@
-import { Dialog, DialogTitle, Grid } from "@mui/material";
+import { Dialog, Grid } from "@mui/material";
 import React, { useState } from "react";
 import { Days } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
 import ActionButtons from "./ActionButtons";
-import { RepeatEvery, Episode } from "./RepeatEvery";
+import { RepeatEvery, Period } from "./RepeatEvery";
 import RepeatOn from "./RepeatOn";
 import { End, EndOptions } from "./End";
 
@@ -30,9 +30,8 @@ const CustomDialog = ({
       " of the month",
   ];
 
-  const [repeatEveryNumberChanged, setRepeatEveryNumberChanged] =
-    useState<string>("1");
-  const [repeatEvery, setRepeatEvery] = useState<string>(Episode.WEEK);
+  const [repeatCount, setRepeatCount] = useState<string>("1");
+  const [repeatEvery, setRepeatEvery] = useState<string>(Period.WEEK);
   const [selectedDays, setSelectedDays] = useState<string[]>([
     Days[date.getDay()],
   ]);
@@ -40,7 +39,7 @@ const CustomDialog = ({
     repeatOnMonthOptions[0]
   );
   const [ends, setEnds] = useState<string>(EndOptions.NEVER);
-  const [occurence, setOccurence] = useState<string>("1");
+  const [endsCount, setEndsCount] = useState<string>("1");
   const [endDate, setEndDate] = useState<Date>(date);
 
   const handleSelectedDaysChanged = (dayClicked: string) => {
@@ -54,7 +53,7 @@ const CustomDialog = ({
     console.log("handleSelectedDaysChanged " + dayClicked);
   };
 
-  const handleEndDateChanged = (dateChanged: Date | null) => {
+  const handleEndDateChanged = (dateChanged: Date) => {
     if (dateChanged === null) {
       console.log("handleEndDateChanged NULL");
       setEndDate(date);
@@ -65,22 +64,30 @@ const CustomDialog = ({
   };
 
   const handleDoneDialog = () => {
-    // Build here the data
-    // Check validation
-    doneDialog({ stub: "stub" });
+    const data = {
+      repeatCount: repeatCount,
+      repeatEvery: repeatEvery,
+      selectedDays: selectedDays,
+      monthRepeat: monthRepeat,
+      ends: ends,
+      endsCount: endsCount,
+      endDate: endDate,
+    };
+
+    doneDialog(data);
   };
 
   return (
     <Dialog open={open} onClose={() => closeDialog()}>
-      <DialogTitle sx={{ paddingLeft: "2%" }}>{title}</DialogTitle>
-      <Grid container spacing={1} sx={{ paddingLeft: "2%" }}>
+      <h3 style={{ paddingLeft: "2%" }}>{title}</h3>
+      <Grid container spacing={2} sx={{ paddingLeft: "2%" }}>
         <RepeatEvery
-          numberChanged={(value: string) => setRepeatEveryNumberChanged(value)}
+          numberChanged={(value: string) => setRepeatCount(value)}
           episodeChanged={(value: string) => setRepeatEvery(value)}
         />
         <RepeatOn
-          isWeek={repeatEvery === Episode.WEEK}
-          isMonth={repeatEvery === Episode.MONTH}
+          isWeek={repeatEvery === Period.WEEK}
+          isMonth={repeatEvery === Period.MONTH}
           selectedDays={selectedDays}
           dayClicked={handleSelectedDaysChanged}
           monthRepeatChanged={(valueChanged) => setMonthRepeat(valueChanged)}
@@ -89,7 +96,7 @@ const CustomDialog = ({
         <End
           endChanged={(value) => setEnds(value)}
           isEnd={ends === EndOptions.AFTER}
-          occurenceChanged={(value) => setOccurence(value)}
+          occurenceChanged={(value) => setEndsCount(value)}
           isSpecific={ends === EndOptions.SPECIFIC}
           currentDate={date}
           chosenDate={endDate}

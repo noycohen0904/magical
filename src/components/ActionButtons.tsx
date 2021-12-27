@@ -20,7 +20,12 @@ const ActionButtons = ({
       sx={{ paddingBottom: "10px", paddingRight: "2%" }}
     >
       <Grid item>
-        <Button size="small" variant="outlined" onClick={closeDialog}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={closeDialog}
+          sx={{ textTransform: "none" }}
+        >
           Cancel
         </Button>
       </Grid>
@@ -30,6 +35,7 @@ const ActionButtons = ({
           variant="contained"
           color="primary"
           onClick={handleDoneDialog}
+          sx={{ textTransform: "none" }}
         >
           Done
         </Button>

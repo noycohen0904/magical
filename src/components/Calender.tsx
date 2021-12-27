@@ -1,51 +1,48 @@
-import React from "react";
-import { Grid } from "@mui/material";
+import React, { useState } from "react";
+import { Grid, Dialog } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
+import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import StaticDatePicker from "@mui/lab/StaticDatePicker";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import Moment from "moment";
 
 interface CalenderProps {
   currentDate: Date;
   chosenDate: Date;
-  clickedDate: (dateChanged: Date | null) => void;
+  clickedDate: (dateChanged: Date) => void;
 }
 
 const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
-  const [value, setValue] = React.useState<Date | null>(new Date());
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <Grid item>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <div>calender</div>
-        {/* <StaticDatePicker
-          displayStaticWrapperAs="desktop"
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        /> */}
-        {/* <DatePicker
-          minDate={currentDate}
-          value={chosenDate}
-          inputFormat="MMMM dd, yyyy"
-          onChange={(newValue) => {
-            clickedDate(newValue);
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log("EVENT");
-              }}
-            />
-          )}
-        /> */}
-      </LocalizationProvider>
+      <Button
+        variant="outlined"
+        endIcon={<ArrowDropUpIcon />}
+        onClick={() => setOpen(true)}
+        size="small"
+        sx={{ textTransform: "none" }}
+      >
+        {Moment(chosenDate).format("MMMM DD, yyyy")}
+        {console.log(chosenDate.toString())}
+      </Button>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <StaticDatePicker
+            minDate={currentDate}
+            displayStaticWrapperAs="desktop"
+            value={chosenDate}
+            onChange={(newValue) => {
+              if (newValue) clickedDate(newValue);
+              setOpen(false);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+      </Dialog>
     </Grid>
   );
 };
