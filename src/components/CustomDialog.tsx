@@ -1,7 +1,6 @@
 import { Dialog, DialogTitle, Grid } from "@mui/material";
 import React, { useState } from "react";
 import IconHeader from "./IconHeader";
-import EventRepeatIcon from "@mui/icons-material/EventRepeat";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import {
   AFTER,
@@ -16,6 +15,7 @@ import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
 import Calender from "./Calender";
 import ActionButtons from "./ActionButtons";
 import { RepeatEvery, Episode } from "./RepeatEvery";
+import RepeatOn from "./RepeatOn";
 
 interface CustomDialogProps {
   title: string;
@@ -64,11 +64,6 @@ const CustomDialog = ({
     console.log("handleSelectedDaysChanged " + dayClicked);
   };
 
-  const handleMonthRepeatChanged = (valueChanged: string) => {
-    setMonthRepeat(valueChanged);
-    console.log("handleMonthRepeatChanged " + valueChanged);
-  };
-
   const handleEndSelectorChange = (valueChanged: string) => {
     setEnds(valueChanged);
     console.log("handleEndSelectorChange " + valueChanged);
@@ -103,26 +98,14 @@ const CustomDialog = ({
           numberChanged={(value: string) => setRepeatEveryNumberChanged(value)}
           episodeChanged={(value: string) => setRepeatEvery(value)}
         />
-        <Grid container item spacing={1} alignItems="center">
-          {(repeatEvery === Episode.MONTH || repeatEvery === Episode.WEEK) && (
-            <IconHeader title="Repeat on">
-              <EventRepeatIcon />
-            </IconHeader>
-          )}
-          {repeatEvery === Episode.WEEK && (
-            <DaysButtons
-              selectedDays={selectedDays}
-              selectedDaysChanged={handleSelectedDaysChanged}
-            />
-          )}
-          {repeatEvery === Episode.MONTH && (
-            <CustomSelect
-              options={repeatOnMonthOptions}
-              selectChanged={handleMonthRepeatChanged}
-              defaultValue={repeatOnMonthOptions[0]}
-            />
-          )}
-        </Grid>
+        <RepeatOn
+          isWeek={repeatEvery === Episode.WEEK}
+          isMonth={repeatEvery === Episode.MONTH}
+          selectedDays={selectedDays}
+          dayClicked={handleSelectedDaysChanged}
+          monthRepeatChanged={(valueChanged) => setMonthRepeat(valueChanged)}
+          options={repeatOnMonthOptions}
+        />
         <Grid container item spacing={1} alignItems="center">
           <IconHeader title="Ends">
             <KeyboardTabIcon />

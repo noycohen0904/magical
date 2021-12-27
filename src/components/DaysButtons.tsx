@@ -21,11 +21,6 @@ const DaysButtons = ({
   selectedDays,
   selectedDaysChanged,
 }: DaysButtonsProps) => {
-  const handleDayClicked = (day: string) => {
-    console.log("handle day clicked inside DaysButtons - " + day);
-    selectedDaysChanged(day);
-  };
-
   const variantType = (option: string): "contained" | "outlined" => {
     return selectedDays.find((day) => day === option)
       ? "contained"
@@ -39,7 +34,7 @@ const DaysButtons = ({
           <Button
             size="small"
             variant={variantType(option)}
-            onClick={() => handleDayClicked(option)}
+            onClick={() => selectedDaysChanged(option)}
             key={option}
             sx={{
               maxWidth: "30px",
