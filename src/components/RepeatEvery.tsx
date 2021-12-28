@@ -4,15 +4,14 @@ import IconHeader from "./IconHeader";
 import { Grid } from "@mui/material";
 import { CustomSelect } from "./CustomSelect";
 import { numberConstants } from "../utils/number-helper";
-import { Period, PeriodSelector } from "./PeriodSelector";
+import { Period, PeriodSelector, PeriodSelectorProps } from "./PeriodSelector";
 
 const MAX_NUMBERS = 10;
 
 const repeatNumberOptions = numberConstants(MAX_NUMBERS);
 
-interface RepeatEveryProps {
+interface RepeatEveryProps extends PeriodSelectorProps {
   numberChanged: (value: string) => void;
-  periodChanged: (value: Period) => void;
 }
 
 const RepeatEvery = ({ numberChanged, periodChanged }: RepeatEveryProps) => {
@@ -31,4 +30,4 @@ const RepeatEvery = ({ numberChanged, periodChanged }: RepeatEveryProps) => {
   );
 };
 
-export { RepeatEvery };
+export { RepeatEvery, RepeatEveryProps };

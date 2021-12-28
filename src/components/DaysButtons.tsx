@@ -16,13 +16,10 @@ const DAY_VALUES: Days[] = Object.values(Days) as Days[];
 
 interface DaysButtonsProps {
   selectedDays: Days[];
-  selectedDaysChanged: (dayClicked: Days) => void;
+  dayClicked: (dayClicked: Days) => void;
 }
 
-const DaysButtons = ({
-  selectedDays,
-  selectedDaysChanged,
-}: DaysButtonsProps) => {
+const DaysButtons = ({ selectedDays, dayClicked }: DaysButtonsProps) => {
   const variantType = (option: Days): "contained" | "outlined" => {
     return selectedDays.find((day) => day === option)
       ? "contained"
@@ -36,7 +33,7 @@ const DaysButtons = ({
           <Button
             size="small"
             variant={variantType(option)}
-            onClick={() => selectedDaysChanged(option)}
+            onClick={() => dayClicked(option)}
             key={option}
             sx={{
               maxWidth: "30px",
@@ -53,4 +50,4 @@ const DaysButtons = ({
   );
 };
 
-export { DaysButtons, Days, DAY_VALUES };
+export { DaysButtons, DaysButtonsProps, Days, DAY_VALUES };

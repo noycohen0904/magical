@@ -4,21 +4,17 @@ import IconHeader from "./IconHeader";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import { CustomSelect } from "./CustomSelect";
 import { numberConstants } from "../utils/number-helper";
-import Calender from "./Calender";
-import { EndOptions, EndSelector } from "./EndSelector";
+import { Calender, CalenderProps } from "./Calender";
+import { EndOptions, EndSelectorProps, EndSelector } from "./EndSelector";
 
 const MAX_NUMBERS = 20;
 
 const occurenceOptions = numberConstants(MAX_NUMBERS);
 
-interface EndProps {
-  endChanged: (value: EndOptions) => void;
+interface EndProps extends EndSelectorProps, CalenderProps {
   isEnd: boolean;
   occurenceChanged: (value: string) => void;
   isSpecific: boolean;
-  currentDate: Date;
-  chosenDate: Date;
-  dateChanged: (newDate: Date) => void;
 }
 
 const End = ({
@@ -28,7 +24,7 @@ const End = ({
   isSpecific,
   currentDate,
   chosenDate,
-  dateChanged,
+  clickedDate,
 }: EndProps) => {
   return (
     <Grid container item spacing={1} alignItems="center">
@@ -47,7 +43,7 @@ const End = ({
         <Calender
           currentDate={currentDate}
           chosenDate={chosenDate}
-          clickedDate={dateChanged}
+          clickedDate={clickedDate}
         />
       )}
     </Grid>

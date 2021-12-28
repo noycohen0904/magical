@@ -108,7 +108,7 @@ const CustomDialog = ({
           isSpecific={ends === EndOptions.SPECIFIC}
           currentDate={date}
           chosenDate={endDate}
-          dateChanged={(newDate) => setEndDate(newDate)}
+          clickedDate={(newDate) => setEndDate(newDate)}
         />
         <ActionButtons
           closeDialog={closeDialog}

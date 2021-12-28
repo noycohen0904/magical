@@ -1,15 +1,13 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import IconHeader from "./IconHeader";
-import { Days, DaysButtons } from "./DaysButtons";
+import { DaysButtons, DaysButtonsProps } from "./DaysButtons";
 import { CustomSelect } from "./CustomSelect";
 import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 
-interface RepeatOnProps {
+interface RepeatOnProps extends DaysButtonsProps {
   isWeek: boolean;
   isMonth: boolean;
-  selectedDays: Days[];
-  dayClicked: (dayClicked: Days) => void;
   monthRepeatChanged: (value: string) => void;
   options: string[];
 }
@@ -30,10 +28,7 @@ const RepeatOn = ({
         </IconHeader>
       )}
       {isWeek && (
-        <DaysButtons
-          selectedDays={selectedDays}
-          selectedDaysChanged={dayClicked}
-        />
+        <DaysButtons selectedDays={selectedDays} dayClicked={dayClicked} />
       )}
       {isMonth && (
         <CustomSelect

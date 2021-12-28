@@ -34,4 +34,4 @@ const PeriodSelector = ({ periodChanged }: PeriodSelectorProps) => {
   );
 };
 
-export { PeriodSelector, Period };
+export { PeriodSelector, PeriodSelectorProps, Period };

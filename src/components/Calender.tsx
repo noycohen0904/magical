@@ -45,4 +45,4 @@ const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
   );
 };
 
-export default Calender;
+export { Calender, CalenderProps };

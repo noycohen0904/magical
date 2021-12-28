@@ -33,4 +33,4 @@ const EndSelector = ({ endChanged }: EndSelectorProps) => {
   );
 };
 
-export { EndSelector, EndOptions };
+export { EndSelector, EndSelectorProps, EndOptions };
