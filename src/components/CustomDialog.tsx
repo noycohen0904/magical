@@ -82,12 +82,17 @@ const CustomDialog = ({
   const closeChild = () => {
     closeDialog();
     setRepeatEvery(Period.WEEK);
+    setEnds(EndOptions.NEVER);
   };
 
   return (
-    <Dialog open={open} onClose={() => closeChild()}>
+    <Dialog
+      open={open}
+      onClose={() => closeChild()}
+      sx={{ maxWidth: "32%", marginLeft: "34%" }}
+    >
       <h3 style={{ paddingLeft: "2%" }}>{title}</h3>
-      <Grid container spacing={3} sx={{ paddingLeft: "2%" }}>
+      <Grid container spacing={3} sx={{ paddingLeft: "2%" }} maxWidth="sm">
         <RepeatEvery
           numberChanged={(value: string) => setRepeatCount(value)}
           periodChanged={(value: string) => setRepeatEvery(value)}

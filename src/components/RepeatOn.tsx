@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import IconHeader from "./IconHeader";
 import { DaysButtons } from "./DaysButtons";
 import { CustomSelect } from "./CustomSelect";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
 import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 
 interface RepeatOnProps {
