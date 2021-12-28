@@ -9,19 +9,19 @@ enum Period {
 }
 
 interface PeriodSelectorProps {
-  periodChanged: (value: Period) => void;
+  onPeriodChange: (value: Period) => void;
   currentPeriod: Period;
 }
 
 const PeriodSelector = ({
-  periodChanged,
+  onPeriodChange,
   currentPeriod,
 }: PeriodSelectorProps) => {
   return (
     <Grid item>
       <Select
         defaultValue={Period.WEEK}
-        onChange={(e) => periodChanged(e.target.value.toString() as Period)}
+        onChange={(e) => onPeriodChange(e.target.value.toString() as Period)}
         size="small"
         value={currentPeriod}
       >

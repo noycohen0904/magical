@@ -61,8 +61,6 @@ const CustomDialog = ({
 
     if (selectedDays.length === 0) setSelectedDays([DAY_VALUES[date.getDay()]]);
     else setSelectedDays([...selectedDays]);
-
-    console.log("handleSelectedDaysChanged " + dayClicked);
   };
 
   const handleDoneDialog = () => {
@@ -90,33 +88,33 @@ const CustomDialog = ({
       <h3 style={{ paddingLeft: "2%" }}>{title}</h3>
       <Grid container spacing={3} sx={{ paddingLeft: "2%" }} maxWidth="sm">
         <RepeatEvery
-          numberChanged={(value: string) => setRepeatCount(value)}
-          CurrentRepeatCount={repeatCount}
-          periodChanged={(value: Period) => setPeriod(value)}
+          onNumberChange={(value: string) => setRepeatCount(value)}
+          currentRepeatCount={repeatCount}
+          onPeriodChange={(value: Period) => setPeriod(value)}
           currentPeriod={period}
         />
         <RepeatOn
           isWeek={period === Period.WEEK}
           isMonth={period === Period.MONTH}
           selectedDays={selectedDays}
-          dayClicked={handleSelectedDaysChanged}
-          monthRepeatChanged={(valueChanged) => setMonthRepeat(valueChanged)}
+          onDayClick={handleSelectedDaysChanged}
+          onMonthRepeatChange={(valueChanged) => setMonthRepeat(valueChanged)}
           options={repeatOnMonthOptions}
           currentMonthRepeat={monthRepeat}
         />
         <End
-          endChanged={(value: EndOptions) => setEnds(value)}
+          onEndChange={(value: EndOptions) => setEnds(value)}
           isEnd={ends === EndOptions.AFTER}
-          occurenceChanged={(value) => setEndsCount(value)}
+          onEndsCountChange={(value) => setEndsCount(value)}
           currentEndsCount={endsCount}
           isSpecific={ends === EndOptions.SPECIFIC}
           currentDate={date}
           chosenDate={endDate}
-          clickedDate={(newDate) => setEndDate(newDate)}
+          onDateChange={(newDate) => setEndDate(newDate)}
         />
         <ActionButtons
           closeDialog={closeDialog}
-          handleDoneDialog={handleDoneDialog}
+          doneDialog={handleDoneDialog}
         />
       </Grid>
     </Dialog>

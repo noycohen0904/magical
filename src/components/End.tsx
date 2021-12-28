@@ -13,32 +13,32 @@ const occurenceOptions = numberConstants(MAX_NUMBERS);
 
 interface EndProps extends EndSelectorProps, CalenderProps {
   isEnd: boolean;
-  occurenceChanged: (value: string) => void;
+  onEndsCountChange: (value: string) => void;
   isSpecific: boolean;
   currentEndsCount: string;
 }
 
 const End = ({
-  endChanged,
+  onEndChange,
   isEnd,
-  occurenceChanged,
+  onEndsCountChange,
   currentEndsCount,
   isSpecific,
   currentDate,
   chosenDate,
-  clickedDate,
+  onDateChange,
 }: EndProps) => {
   return (
     <Grid container item spacing={1} alignItems="center">
       <IconHeader title="Ends">
         <KeyboardTabIcon fontSize="small" />
       </IconHeader>
-      <EndSelector endChanged={endChanged} />
+      <EndSelector onEndChange={onEndChange} />
       {isEnd && (
         <CustomSelect
           selected={currentEndsCount}
           options={occurenceOptions}
-          selectChanged={occurenceChanged}
+          onSelectChange={onEndsCountChange}
           defaultValue={occurenceOptions[0]}
         />
       )}
@@ -46,7 +46,7 @@ const End = ({
         <Calender
           currentDate={currentDate}
           chosenDate={chosenDate}
-          clickedDate={clickedDate}
+          onDateChange={onDateChange}
         />
       )}
     </Grid>

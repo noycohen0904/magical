@@ -8,7 +8,7 @@ import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 interface RepeatOnProps extends DaysButtonsProps {
   isWeek: boolean;
   isMonth: boolean;
-  monthRepeatChanged: (value: string) => void;
+  onMonthRepeatChange: (value: string) => void;
   options: string[];
   currentMonthRepeat: string;
 }
@@ -17,8 +17,8 @@ const RepeatOn = ({
   isWeek,
   isMonth,
   selectedDays,
-  dayClicked,
-  monthRepeatChanged,
+  onDayClick,
+  onMonthRepeatChange,
   currentMonthRepeat,
   options,
 }: RepeatOnProps) => {
@@ -30,13 +30,13 @@ const RepeatOn = ({
         </IconHeader>
       )}
       {isWeek && (
-        <DaysButtons selectedDays={selectedDays} dayClicked={dayClicked} />
+        <DaysButtons selectedDays={selectedDays} onDayClick={onDayClick} />
       )}
       {isMonth && (
         <CustomSelect
           selected={currentMonthRepeat}
           options={options}
-          selectChanged={monthRepeatChanged}
+          onSelectChange={onMonthRepeatChange}
           defaultValue={options[0]}
         />
       )}

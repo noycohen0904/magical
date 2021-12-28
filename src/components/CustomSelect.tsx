@@ -3,14 +3,14 @@ import { MenuItem, Select, Grid } from "@mui/material";
 
 interface CustomSelectProps {
   options: string[];
-  selectChanged: (valueChanged: string) => void;
+  onSelectChange: (valueChanged: string) => void;
   defaultValue: string;
   selected: string;
 }
 
 const CustomSelect = ({
   options,
-  selectChanged,
+  onSelectChange,
   defaultValue,
   selected,
 }: CustomSelectProps) => {
@@ -18,7 +18,7 @@ const CustomSelect = ({
     <Grid item>
       <Select
         defaultValue={defaultValue}
-        onChange={(e) => selectChanged(e.target.value.toString())}
+        onChange={(e) => onSelectChange(e.target.value.toString())}
         size="small"
         value={selected}
       >

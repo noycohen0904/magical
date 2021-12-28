@@ -4,13 +4,10 @@ import { Grid } from "@mui/material";
 
 interface ActionButtonsProps {
   closeDialog: () => void;
-  handleDoneDialog: () => void;
+  doneDialog: () => void;
 }
 
-const ActionButtons = ({
-  closeDialog,
-  handleDoneDialog,
-}: ActionButtonsProps) => {
+const ActionButtons = ({ closeDialog, doneDialog }: ActionButtonsProps) => {
   return (
     <Grid
       container
@@ -29,7 +26,7 @@ const ActionButtons = ({
           size="small"
           variant="contained"
           color="primary"
-          onClick={handleDoneDialog}
+          onClick={doneDialog}
         >
           Done
         </Button>

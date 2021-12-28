@@ -11,10 +11,10 @@ import Moment from "moment";
 interface CalenderProps {
   currentDate: Date;
   chosenDate: Date;
-  clickedDate: (dateChanged: Date) => void;
+  onDateChange: (dateChanged: Date) => void;
 }
 
-const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
+const Calender = ({ currentDate, chosenDate, onDateChange }: CalenderProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -34,7 +34,7 @@ const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
             displayStaticWrapperAs="desktop"
             value={chosenDate}
             onChange={(newValue) => {
-              if (newValue) clickedDate(newValue);
+              if (newValue) onDateChange(newValue);
               setOpen(false);
             }}
             renderInput={(params) => <TextField {...params} />}

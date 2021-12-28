@@ -8,15 +8,15 @@ enum EndOptions {
 }
 
 interface EndSelectorProps {
-  endChanged: (value: EndOptions) => void;
+  onEndChange: (value: EndOptions) => void;
 }
 
-const EndSelector = ({ endChanged }: EndSelectorProps) => {
+const EndSelector = ({ onEndChange }: EndSelectorProps) => {
   return (
     <Grid item>
       <Select
         defaultValue={EndOptions.NEVER}
-        onChange={(e) => endChanged(e.target.value.toString() as EndOptions)}
+        onChange={(e) => onEndChange(e.target.value.toString() as EndOptions)}
         size="small"
       >
         <MenuItem value={EndOptions.NEVER}>{EndOptions.NEVER}</MenuItem>

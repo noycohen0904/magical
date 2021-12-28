@@ -11,14 +11,14 @@ const MAX_NUMBERS = 10;
 const repeatNumberOptions = numberConstants(MAX_NUMBERS);
 
 interface RepeatEveryProps extends PeriodSelectorProps {
-  numberChanged: (value: string) => void;
-  CurrentRepeatCount: string;
+  onNumberChange: (value: string) => void;
+  currentRepeatCount: string;
 }
 
 const RepeatEvery = ({
-  numberChanged,
-  CurrentRepeatCount,
-  periodChanged,
+  onNumberChange,
+  currentRepeatCount,
+  onPeriodChange,
   currentPeriod,
 }: RepeatEveryProps) => {
   return (
@@ -27,14 +27,14 @@ const RepeatEvery = ({
         <ReplayIcon fontSize="small" />
       </IconHeader>
       <CustomSelect
-        selected={CurrentRepeatCount}
+        selected={currentRepeatCount}
         options={repeatNumberOptions}
-        selectChanged={numberChanged}
+        onSelectChange={onNumberChange}
         defaultValue={repeatNumberOptions[0]}
       />
       <PeriodSelector
         currentPeriod={currentPeriod}
-        periodChanged={periodChanged}
+        onPeriodChange={onPeriodChange}
       />
     </Grid>
   );
