@@ -5,19 +5,14 @@ import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import { CustomSelect } from "./CustomSelect";
 import { numberConstants } from "../utils/numberHelper";
 import Calender from "./Calender";
+import { EndOptions, EndSelector } from "./EndSelector";
 
 const MAX_NUMBERS = 20;
 
 const occurenceOptions = numberConstants(MAX_NUMBERS);
 
-enum EndOptions {
-  NEVER = "never",
-  SPECIFIC = "on specific day...",
-  AFTER = "after number of occurences...",
-}
-
 interface EndProps {
-  endChanged: (value: string) => void;
+  endChanged: (value: EndOptions) => void;
   isEnd: boolean;
   occurenceChanged: (value: string) => void;
   isSpecific: boolean;
@@ -40,11 +35,7 @@ const End = ({
       <IconHeader title="Ends">
         <KeyboardTabIcon fontSize="small" />
       </IconHeader>
-      <CustomSelect
-        options={Object.values(EndOptions)}
-        selectChanged={endChanged}
-        defaultValue={EndOptions.NEVER}
-      />
+      <EndSelector endChanged={endChanged} />
       {isEnd && (
         <CustomSelect
           options={occurenceOptions}

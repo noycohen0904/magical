@@ -4,13 +4,7 @@ import IconHeader from "./IconHeader";
 import { Grid } from "@mui/material";
 import { CustomSelect } from "./CustomSelect";
 import { numberConstants } from "../utils/numberHelper";
-
-enum Period {
-  DAY = "day",
-  WEEK = "week",
-  MONTH = "month",
-  YEAR = "year",
-}
+import { Period, PeriodSelector } from "./PeriodSelector";
 
 const MAX_NUMBERS = 10;
 
@@ -18,7 +12,7 @@ const repeatNumberOptions = numberConstants(MAX_NUMBERS);
 
 interface RepeatEveryProps {
   numberChanged: (value: string) => void;
-  periodChanged: (value: string) => void;
+  periodChanged: (value: Period) => void;
 }
 
 const RepeatEvery = ({ numberChanged, periodChanged }: RepeatEveryProps) => {
@@ -32,13 +26,9 @@ const RepeatEvery = ({ numberChanged, periodChanged }: RepeatEveryProps) => {
         selectChanged={numberChanged}
         defaultValue={repeatNumberOptions[0]}
       />
-      <CustomSelect
-        options={Object.values(Period)}
-        selectChanged={periodChanged}
-        defaultValue={Period.WEEK}
-      />
+      <PeriodSelector periodChanged={periodChanged} />
     </Grid>
   );
 };
 
-export { RepeatEvery, Period };
+export { RepeatEvery };

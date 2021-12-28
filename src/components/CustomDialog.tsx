@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { Days } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
 import ActionButtons from "./ActionButtons";
-import { RepeatEvery, Period } from "./RepeatEvery";
+import { RepeatEvery } from "./RepeatEvery";
 import RepeatOn from "./RepeatOn";
-import { End, EndOptions } from "./End";
+import { End } from "./End";
+import { EndOptions } from "./EndSelector";
+import { Period } from "./PeriodSelector";
 
 interface CustomDialogProps {
   title: string;
@@ -17,7 +19,7 @@ interface CustomDialogProps {
 
 type Result = {
   repeatCount: string;
-  repeatEvery: string;
+  repeatEvery: Period;
   selectedDays?: string[];
   monthRepeat?: string;
   ends: string;
@@ -41,14 +43,14 @@ const CustomDialog = ({
   ];
 
   const [repeatCount, setRepeatCount] = useState<string>("1");
-  const [repeatEvery, setRepeatEvery] = useState<string>(Period.WEEK);
+  const [repeatEvery, setRepeatEvery] = useState<Period>(Period.WEEK);
   const [selectedDays, setSelectedDays] = useState<string[]>([
     Days[date.getDay()],
   ]);
   const [monthRepeat, setMonthRepeat] = useState<string>(
     repeatOnMonthOptions[0]
   );
-  const [ends, setEnds] = useState<string>(EndOptions.NEVER);
+  const [ends, setEnds] = useState<EndOptions>(EndOptions.NEVER);
   const [endsCount, setEndsCount] = useState<string>("1");
   const [endDate, setEndDate] = useState<Date>(date);
 
@@ -95,7 +97,7 @@ const CustomDialog = ({
       <Grid container spacing={3} sx={{ paddingLeft: "2%" }} maxWidth="sm">
         <RepeatEvery
           numberChanged={(value: string) => setRepeatCount(value)}
-          periodChanged={(value: string) => setRepeatEvery(value)}
+          periodChanged={(value: Period) => setRepeatEvery(value)}
         />
         <RepeatOn
           isWeek={repeatEvery === Period.WEEK}
@@ -106,7 +108,7 @@ const CustomDialog = ({
           options={repeatOnMonthOptions}
         />
         <End
-          endChanged={(value: string) => setEnds(value)}
+          endChanged={(value: EndOptions) => setEnds(value)}
           isEnd={ends === EndOptions.AFTER}
           occurenceChanged={(value) => setEndsCount(value)}
           isSpecific={ends === EndOptions.SPECIFIC}
