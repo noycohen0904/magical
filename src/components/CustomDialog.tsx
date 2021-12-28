@@ -11,9 +11,19 @@ interface CustomDialogProps {
   title: string;
   open: boolean;
   closeDialog: () => void;
-  doneDialog: (data: any) => void;
+  doneDialog: (data: Result) => void;
   date: Date;
 }
+
+type Result = {
+  repeatCount: string;
+  repeatEvery: string;
+  selectedDays?: string[];
+  monthRepeat?: string;
+  ends: string;
+  endsCount?: string;
+  endDate?: Date;
+};
 
 const CustomDialog = ({
   title,
@@ -64,7 +74,7 @@ const CustomDialog = ({
   };
 
   const handleDoneDialog = () => {
-    const data = {
+    const data: Result = {
       repeatCount: repeatCount,
       repeatEvery: repeatEvery,
       selectedDays: selectedDays,
@@ -77,13 +87,18 @@ const CustomDialog = ({
     doneDialog(data);
   };
 
+  const closeChild = () => {
+    closeDialog();
+    setRepeatEvery(Period.WEEK);
+  };
+
   return (
-    <Dialog open={open} onClose={() => closeDialog()}>
+    <Dialog open={open} onClose={() => closeChild()}>
       <h3 style={{ paddingLeft: "2%" }}>{title}</h3>
       <Grid container spacing={3} sx={{ paddingLeft: "2%" }}>
         <RepeatEvery
           numberChanged={(value: string) => setRepeatCount(value)}
-          episodeChanged={(value: string) => setRepeatEvery(value)}
+          periodChanged={(value: string) => setRepeatEvery(value)}
         />
         <RepeatOn
           isWeek={repeatEvery === Period.WEEK}
@@ -94,7 +109,7 @@ const CustomDialog = ({
           options={repeatOnMonthOptions}
         />
         <End
-          endChanged={(value) => setEnds(value)}
+          endChanged={(value: string) => setEnds(value)}
           isEnd={ends === EndOptions.AFTER}
           occurenceChanged={(value) => setEndsCount(value)}
           isSpecific={ends === EndOptions.SPECIFIC}
@@ -103,7 +118,7 @@ const CustomDialog = ({
           dateChanged={(newDate) => handleEndDateChanged(newDate)}
         />
         <ActionButtons
-          closeDialog={closeDialog}
+          closeDialog={() => closeDialog()}
           handleDoneDialog={handleDoneDialog}
         />
       </Grid>
@@ -111,4 +126,4 @@ const CustomDialog = ({
   );
 };
 
-export default CustomDialog;
+export { CustomDialog, Result };

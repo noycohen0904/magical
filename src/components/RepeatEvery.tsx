@@ -18,10 +18,10 @@ const repeatNumberOptions = numberConstants(MAX_NUMBERS);
 
 interface RepeatEveryProps {
   numberChanged: (value: string) => void;
-  episodeChanged: (value: string) => void;
+  periodChanged: (value: string) => void;
 }
 
-const RepeatEvery = ({ numberChanged, episodeChanged }: RepeatEveryProps) => {
+const RepeatEvery = ({ numberChanged, periodChanged }: RepeatEveryProps) => {
   return (
     <Grid container item spacing={1} alignItems="center">
       <IconHeader title="Repeat every">
@@ -34,7 +34,7 @@ const RepeatEvery = ({ numberChanged, episodeChanged }: RepeatEveryProps) => {
       />
       <CustomSelect
         options={Object.values(Period)}
-        selectChanged={episodeChanged}
+        selectChanged={periodChanged}
         defaultValue={Period.WEEK}
       />
     </Grid>

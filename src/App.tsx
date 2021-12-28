@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import CustomDialog from "./components/CustomDialog";
+import { CustomDialog, Result } from "./components/CustomDialog";
 
 function App() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -13,7 +13,7 @@ function App() {
     setOpenDialog(false);
   };
 
-  const handleDoneDialog = (data: any) => {
+  const handleDoneDialog = (data: Result) => {
     console.log(data);
     setOpenDialog(false);
   };
