@@ -1,7 +1,7 @@
 import { Dialog, Grid } from "@mui/material";
 import React, { useState } from "react";
 import { Days, DAY_VALUES } from "./DaysButtons";
-import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
+import { occuredInMonth, ordinalSuffixOf } from "../utils/date-helper";
 import ActionButtons from "./ActionButtons";
 import { RepeatEvery } from "./RepeatEvery";
 import RepeatOn from "./RepeatOn";

@@ -16,7 +16,7 @@ const ordinalSuffixOf = (day: number): string => {
 };
 
 const occuredInMonth = (day: number): string => {
-  const occuredInMonth = Math.floor(day / 7 + 1);
+  const occuredInMonth = Math.floor(day / 7);
   let weekString = "";
 
   switch (occuredInMonth) {
