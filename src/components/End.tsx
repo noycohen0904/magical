@@ -15,12 +15,14 @@ interface EndProps extends EndSelectorProps, CalenderProps {
   isEnd: boolean;
   occurenceChanged: (value: string) => void;
   isSpecific: boolean;
+  currentEndsCount: string;
 }
 
 const End = ({
   endChanged,
   isEnd,
   occurenceChanged,
+  currentEndsCount,
   isSpecific,
   currentDate,
   chosenDate,
@@ -34,6 +36,7 @@ const End = ({
       <EndSelector endChanged={endChanged} />
       {isEnd && (
         <CustomSelect
+          selected={currentEndsCount}
           options={occurenceOptions}
           selectChanged={occurenceChanged}
           defaultValue={occurenceOptions[0]}

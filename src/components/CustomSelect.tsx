@@ -5,12 +5,14 @@ interface CustomSelectProps {
   options: string[];
   selectChanged: (valueChanged: string) => void;
   defaultValue: string;
+  selected: string;
 }
 
 const CustomSelect = ({
   options,
   selectChanged,
   defaultValue,
+  selected,
 }: CustomSelectProps) => {
   return (
     <Grid item>
@@ -18,6 +20,7 @@ const CustomSelect = ({
         defaultValue={defaultValue}
         onChange={(e) => selectChanged(e.target.value.toString())}
         size="small"
+        value={selected}
       >
         {options.map((option) => (
           <MenuItem key={option} value={option}>

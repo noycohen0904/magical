@@ -10,25 +10,25 @@ enum Period {
 
 interface PeriodSelectorProps {
   periodChanged: (value: Period) => void;
+  currentPeriod: Period;
 }
 
-const PeriodSelector = ({ periodChanged }: PeriodSelectorProps) => {
+const PeriodSelector = ({
+  periodChanged,
+  currentPeriod,
+}: PeriodSelectorProps) => {
   return (
     <Grid item>
       <Select
         defaultValue={Period.WEEK}
         onChange={(e) => periodChanged(e.target.value.toString() as Period)}
         size="small"
+        value={currentPeriod}
       >
-        {Object.keys(Period).map((key) => (
-          // @ts-ignore
-          <MenuItem key={key as Period} value={Period[key as Period]}>
-            {
-              // @ts-ignore
-              Period[key as Period]
-            }
-          </MenuItem>
-        ))}
+        <MenuItem value={Period.DAY}>{Period.DAY}</MenuItem>
+        <MenuItem value={Period.WEEK}>{Period.WEEK}</MenuItem>
+        <MenuItem value={Period.MONTH}>{Period.MONTH}</MenuItem>
+        <MenuItem value={Period.YEAR}>{Period.YEAR}</MenuItem>
       </Select>
     </Grid>
   );

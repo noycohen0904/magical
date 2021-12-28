@@ -19,15 +19,9 @@ const EndSelector = ({ endChanged }: EndSelectorProps) => {
         onChange={(e) => endChanged(e.target.value.toString() as EndOptions)}
         size="small"
       >
-        {Object.keys(EndOptions).map((key) => (
-          // @ts-ignore
-          <MenuItem key={key as EndOptions} value={EndOptions[key as Period]}>
-            {
-              // @ts-ignore
-              EndOptions[key as Period]
-            }
-          </MenuItem>
-        ))}
+        <MenuItem value={EndOptions.NEVER}>{EndOptions.NEVER}</MenuItem>
+        <MenuItem value={EndOptions.SPECIFIC}>{EndOptions.SPECIFIC}</MenuItem>
+        <MenuItem value={EndOptions.AFTER}>{EndOptions.AFTER}</MenuItem>
       </Select>
     </Grid>
   );

@@ -43,7 +43,7 @@ const CustomDialog = ({
   ];
 
   const [repeatCount, setRepeatCount] = useState<string>("1");
-  const [repeatEvery, setRepeatEvery] = useState<Period>(Period.WEEK);
+  const [period, setPeriod] = useState<Period>(Period.WEEK);
   const [selectedDays, setSelectedDays] = useState<Days[]>([
     DAY_VALUES[date.getDay()],
   ]);
@@ -68,12 +68,12 @@ const CustomDialog = ({
   const handleDoneDialog = () => {
     const data: Result = {
       repeatCount: repeatCount,
-      repeatEvery: repeatEvery,
+      repeatEvery: period,
       ends: ends,
     };
 
-    if (repeatEvery === Period.WEEK) data.selectedDays = selectedDays;
-    if (repeatEvery === Period.MONTH) data.monthRepeat = monthRepeat;
+    if (period === Period.WEEK) data.selectedDays = selectedDays;
+    if (period === Period.MONTH) data.monthRepeat = monthRepeat;
 
     if (ends === EndOptions.AFTER) data.endsCount = endsCount;
     if (ends === EndOptions.SPECIFIC) data.endDate = endDate;
@@ -91,20 +91,24 @@ const CustomDialog = ({
       <Grid container spacing={3} sx={{ paddingLeft: "2%" }} maxWidth="sm">
         <RepeatEvery
           numberChanged={(value: string) => setRepeatCount(value)}
-          periodChanged={(value: Period) => setRepeatEvery(value)}
+          CurrentRepeatCount={repeatCount}
+          periodChanged={(value: Period) => setPeriod(value)}
+          currentPeriod={period}
         />
         <RepeatOn
-          isWeek={repeatEvery === Period.WEEK}
-          isMonth={repeatEvery === Period.MONTH}
+          isWeek={period === Period.WEEK}
+          isMonth={period === Period.MONTH}
           selectedDays={selectedDays}
           dayClicked={handleSelectedDaysChanged}
           monthRepeatChanged={(valueChanged) => setMonthRepeat(valueChanged)}
           options={repeatOnMonthOptions}
+          currentMonthRepeat={monthRepeat}
         />
         <End
           endChanged={(value: EndOptions) => setEnds(value)}
           isEnd={ends === EndOptions.AFTER}
           occurenceChanged={(value) => setEndsCount(value)}
+          currentEndsCount={endsCount}
           isSpecific={ends === EndOptions.SPECIFIC}
           currentDate={date}
           chosenDate={endDate}

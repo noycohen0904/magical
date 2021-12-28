@@ -10,6 +10,7 @@ interface RepeatOnProps extends DaysButtonsProps {
   isMonth: boolean;
   monthRepeatChanged: (value: string) => void;
   options: string[];
+  currentMonthRepeat: string;
 }
 
 const RepeatOn = ({
@@ -18,6 +19,7 @@ const RepeatOn = ({
   selectedDays,
   dayClicked,
   monthRepeatChanged,
+  currentMonthRepeat,
   options,
 }: RepeatOnProps) => {
   return (
@@ -32,6 +34,7 @@ const RepeatOn = ({
       )}
       {isMonth && (
         <CustomSelect
+          selected={currentMonthRepeat}
           options={options}
           selectChanged={monthRepeatChanged}
           defaultValue={options[0]}
