@@ -5,6 +5,13 @@ const theme = createTheme({
     fontFamily: "Calibri",
     button: { textTransform: "none" },
   },
+  components: {
+    MuiMenu: {
+      styleOverrides: {
+        root: { maxHeight: "30vh" },
+      },
+    },
+  },
 });
 
 export default theme;

@@ -4,7 +4,7 @@ import IconHeader from "./IconHeader";
 import { Grid } from "@mui/material";
 import { CustomSelect } from "./CustomSelect";
 import { numberConstants } from "../utils/number-helper";
-import { Period, PeriodSelector, PeriodSelectorProps } from "./PeriodSelector";
+import { PeriodSelector, PeriodSelectorProps } from "./PeriodSelector";
 
 const MAX_NUMBERS = 10;
 
