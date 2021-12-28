@@ -79,7 +79,7 @@ const CustomDialog = ({
     doneDialog(data);
   };
 
-  const closeChild = () => {
+  const handleCloseDialog = () => {
     closeDialog();
     setRepeatEvery(Period.WEEK);
     setEnds(EndOptions.NEVER);
@@ -88,7 +88,7 @@ const CustomDialog = ({
   return (
     <Dialog
       open={open}
-      onClose={() => closeChild()}
+      onClose={handleCloseDialog}
       sx={{ maxWidth: "32%", marginLeft: "34%" }}
     >
       <h3 style={{ paddingLeft: "2%" }}>{title}</h3>
@@ -115,7 +115,7 @@ const CustomDialog = ({
           dateChanged={(newDate) => setEndDate(newDate)}
         />
         <ActionButtons
-          closeDialog={() => closeDialog()}
+          closeDialog={handleCloseDialog}
           handleDoneDialog={handleDoneDialog}
         />
       </Grid>
