@@ -1,5 +1,5 @@
 import { Dialog, Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Days } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
 import ActionButtons from "./ActionButtons";
@@ -81,16 +81,10 @@ const CustomDialog = ({
     doneDialog(data);
   };
 
-  const handleCloseDialog = () => {
-    closeDialog();
-    setRepeatEvery(Period.WEEK);
-    setEnds(EndOptions.NEVER);
-  };
-
   return (
     <Dialog
       open={open}
-      onClose={handleCloseDialog}
+      onClose={closeDialog}
       sx={{ maxWidth: "32%", marginLeft: "34%" }}
     >
       <h3 style={{ paddingLeft: "2%" }}>{title}</h3>
@@ -117,7 +111,7 @@ const CustomDialog = ({
           dateChanged={(newDate) => setEndDate(newDate)}
         />
         <ActionButtons
-          closeDialog={handleCloseDialog}
+          closeDialog={closeDialog}
           handleDoneDialog={handleDoneDialog}
         />
       </Grid>

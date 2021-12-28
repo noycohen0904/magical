@@ -23,13 +23,15 @@ function App() {
       <Button onClick={handleOpenDialog} variant="contained">
         Click to open Dialog
       </Button>
-      <CustomDialog
-        open={openDialog}
-        title="Custom Reacurrence"
-        closeDialog={handleCloseDialog}
-        doneDialog={handleDoneDialog}
-        date={new Date()}
-      />
+      {openDialog && (
+        <CustomDialog
+          open={openDialog}
+          title="Custom Reacurrence"
+          closeDialog={handleCloseDialog}
+          doneDialog={handleDoneDialog}
+          date={new Date()}
+        />
+      )}
     </div>
   );
 }
