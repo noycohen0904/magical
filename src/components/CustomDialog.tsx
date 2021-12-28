@@ -63,26 +63,18 @@ const CustomDialog = ({
     console.log("handleSelectedDaysChanged " + dayClicked);
   };
 
-  const handleEndDateChanged = (dateChanged: Date) => {
-    if (dateChanged === null) {
-      console.log("handleEndDateChanged NULL");
-      setEndDate(date);
-    } else {
-      console.log("handleEndDateChanged " + dateChanged!.toString());
-      setEndDate(dateChanged);
-    }
-  };
-
   const handleDoneDialog = () => {
     const data: Result = {
       repeatCount: repeatCount,
       repeatEvery: repeatEvery,
-      selectedDays: selectedDays,
-      monthRepeat: monthRepeat,
       ends: ends,
-      endsCount: endsCount,
-      endDate: endDate,
     };
+
+    if (repeatEvery === Period.WEEK) data.selectedDays = selectedDays;
+    if (repeatEvery === Period.MONTH) data.monthRepeat = monthRepeat;
+
+    if (ends === EndOptions.AFTER) data.endsCount = endsCount;
+    if (ends === EndOptions.SPECIFIC) data.endDate = endDate;
 
     doneDialog(data);
   };
@@ -115,7 +107,7 @@ const CustomDialog = ({
           isSpecific={ends === EndOptions.SPECIFIC}
           currentDate={date}
           chosenDate={endDate}
-          dateChanged={(newDate) => handleEndDateChanged(newDate)}
+          dateChanged={(newDate) => setEndDate(newDate)}
         />
         <ActionButtons
           closeDialog={() => closeDialog()}

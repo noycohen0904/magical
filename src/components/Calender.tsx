@@ -26,7 +26,6 @@ const Calender = ({ currentDate, chosenDate, clickedDate }: CalenderProps) => {
         size="medium"
       >
         {Moment(chosenDate).format("MMMM DD, yyyy")}
-        {console.log(chosenDate.toString())}
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
