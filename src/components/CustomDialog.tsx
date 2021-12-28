@@ -1,6 +1,6 @@
 import { Dialog, Grid } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { Days } from "./DaysButtons";
+import React, { useState } from "react";
+import { Days, DAY_VALUES } from "./DaysButtons";
 import { occuredInMonth, ordinalSuffixOf } from "../utils/dateHelper";
 import ActionButtons from "./ActionButtons";
 import { RepeatEvery } from "./RepeatEvery";
@@ -20,7 +20,7 @@ interface CustomDialogProps {
 type Result = {
   repeatCount: string;
   repeatEvery: Period;
-  selectedDays?: string[];
+  selectedDays?: Days[];
   monthRepeat?: string;
   ends: string;
   endsCount?: string;
@@ -38,14 +38,14 @@ const CustomDialog = ({
     ordinalSuffixOf(date.getDate()) + " day of the month",
     occuredInMonth(date.getDate()) +
       " " +
-      Days[date.getDay()] +
+      DAY_VALUES[date.getDay()] +
       " of the month",
   ];
 
   const [repeatCount, setRepeatCount] = useState<string>("1");
   const [repeatEvery, setRepeatEvery] = useState<Period>(Period.WEEK);
-  const [selectedDays, setSelectedDays] = useState<string[]>([
-    Days[date.getDay()],
+  const [selectedDays, setSelectedDays] = useState<Days[]>([
+    DAY_VALUES[date.getDay()],
   ]);
   const [monthRepeat, setMonthRepeat] = useState<string>(
     repeatOnMonthOptions[0]
@@ -54,12 +54,12 @@ const CustomDialog = ({
   const [endsCount, setEndsCount] = useState<string>("1");
   const [endDate, setEndDate] = useState<Date>(date);
 
-  const handleSelectedDaysChanged = (dayClicked: string) => {
+  const handleSelectedDaysChanged = (dayClicked: Days) => {
     const index = selectedDays.indexOf(dayClicked);
     if (index > -1) selectedDays.splice(index, 1);
     else selectedDays.push(dayClicked);
 
-    if (selectedDays.length === 0) setSelectedDays([Days[date.getDay()]]);
+    if (selectedDays.length === 0) setSelectedDays([DAY_VALUES[date.getDay()]]);
     else setSelectedDays([...selectedDays]);
 
     console.log("handleSelectedDaysChanged " + dayClicked);
